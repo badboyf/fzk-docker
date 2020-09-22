@@ -1,0 +1,61 @@
+https://yum.postgresql.org/12/redhat/rhel-7-x86_64/repoview/
+https://jdbc.postgresql.org/download.html
+
+yum install --downloadonly --downloaddir=/data
+
+docker run -d --name kong \
+ --privileged=true \
+ -v /Users/fengzhikui/docker/kong/data/profile:/etc/profile \
+ -v /Users/fengzhikui/docker/kong/data/npmrc:/root/.npmrc \
+ -v /Users/fengzhikui/docker/kong/data/kong.conf:/etc/kong/kong.conf \
+ -v /Users/fengzhikui/docker/kong/kongdata/usrlocalkong/:/usr/local/kong \ 
+ -v /Users/fengzhikui/docker/kong/kongdata/etckong:/etc/kong/ \
+ -v /Users/fengzhikui/docker/kong/pgsqldata/varlibpgsql96:/var/lib/pgsql/9.6/ \
+ -p 1337:1337 \
+ -p 8000:8000 \
+ -p 8001:8001 \
+ -p 8443:8443 \
+ -p 5432:5432 \
+ -p 8002:8002 \
+ -v /Users/fengzhikui/docker/kong/data:/data centos:7.5.1804 \
+ /usr/sbin/init
+docker exec -it kong /bin/bash
+yum -y localinstall /data/kong/kong-2.1.0.el7.amd64.rpm \
+  && yum -y localinstall /data/git/* \
+  && yum -y localinstall /data/pg96/* \
+  && yum -y localinstall /data/vim/* \
+  && source /etc/profile \
+  && ln -s /usr/lib64/libz.so.1.2.7 /usr/lib64/libz.so
+/usr/pgsql-9.6/bin/postgresql96-setup initdb && \
+ cp /data/pg_hba.conf /var/lib/pgsql/9.6/data/pg_hba.conf && \
+ cp /data/postgresql.conf /var/lib/pgsql/9.6/data/postgresql.conf && \
+ systemctl start postgresql-9.6 && \
+ su - postgres
+psql -U postgres -h 127.0.0.1 -p 5432
+CREATE USER kong;CREATE DATABASE kong OWNER kong;ALTER USER kong WITH password 'kong';create user konga with password 'konga';alter role konga login;create database konga owner konga;grant all privileges on database konga to konga;
+
+kong migrations bootstrap && kong migrations up -c /etc/kong/kong.conf && kong start && kong health
+kong stop && kong start -c /etc/kong/kong.conf --vv && tail -f /usr/local/kong/logs/*.log
+
+cd /data/konga/konga  &&  node ./bin/konga.js  prepare --adapter postgres --uri postgresql://konga:konga@127.0.0.1:5432/konga && nohup npm run production & 
+tail -f /data/konga/konga/nohup
+
+kong start -c kong.conf --nginx-conf custom_nginx.template
+
+npm install -g gulp bower sails dotenv-extended angular dotenv lodash  async nn stable  sails
+git clone https://github.com/pantsel/konga.git
+cd konga
+npm i
+node ./bin/konga.js  prepare --adapter postgres --uri postgresql://konga:konga@172.17.0.3:5432/konga
+npm run production
+
+/var/lib/pgsql/12/pgstartup.log
+/var/lib/pgsql/12/data
+/usr/pgsql-12/bin/
+
+find / -name libz.so
+yum provides '*/libz.so'
+
+kong plugin:
+luarocks make ${name}-${version}.rockspec
+vim /usr/local/share/lua/5.1/kong/constants.lua   # add the plugin name

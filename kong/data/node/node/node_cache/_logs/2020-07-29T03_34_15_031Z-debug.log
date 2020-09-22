@@ -1,0 +1,20 @@
+0 info it worked if it ends with ok
+1 verbose cli [
+1 verbose cli   '/data/node/node/bin/node',
+1 verbose cli   '/data/node/node/bin/npm',
+1 verbose cli   'run',
+1 verbose cli   'production'
+1 verbose cli ]
+2 info using npm@6.13.4
+3 info using node@v12.16.0
+4 verbose run-script [ 'preproduction', 'production', 'postproduction' ]
+5 info lifecycle kongadmin@0.14.9~preproduction: kongadmin@0.14.9
+6 info lifecycle kongadmin@0.14.9~production: kongadmin@0.14.9
+7 verbose lifecycle kongadmin@0.14.9~production: unsafe-perm in lifecycle true
+8 verbose lifecycle kongadmin@0.14.9~production: PATH: /data/node/node/lib/node_modules/npm/node_modules/npm-lifecycle/node-gyp-bin:/data/konga/konga/node_modules/.bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/data/node/node/bin:/data/node/node/global_node_modules/bin:.
+9 verbose lifecycle kongadmin@0.14.9~production: CWD: /data/konga/konga
+10 silly lifecycle kongadmin@0.14.9~production: Args: [ '-c', 'node --harmony app.js --prod' ]
+11 timing npm Completed in 208616ms
+12 error cb() never called!
+13 error This is an error with npm itself. Please report this error at:
+14 error <https://npm.community>

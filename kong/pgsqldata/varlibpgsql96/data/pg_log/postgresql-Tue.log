@@ -1,0 +1,4 @@
+< 2020-09-15 03:29:17.723 UTC > LOG:  stats_timestamp 2020-09-15 03:29:17.746278+00 is later than collector's time 2020-09-15 03:29:17.72372+00 for database 0
+< 2020-09-15 08:09:04.796 UTC > LOG:  stats_timestamp 2020-09-15 08:09:04.818989+00 is later than collector's time 2020-09-15 08:09:04.796047+00 for database 0
+< 2020-09-15 10:07:28.282 UTC > LOG:  stats_timestamp 2020-09-15 10:07:28.305223+00 is later than collector's time 2020-09-15 10:07:28.282844+00 for database 0
+< 2020-09-16 03:56:05.931 UTC > LOG:  stats_timestamp 2020-09-16 03:56:05.938243+00 is later than collector's time 2020-09-16 03:56:05.930741+00 for database 0

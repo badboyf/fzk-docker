@@ -1,0 +1,10 @@
+
+docker run --rm -d --name mongo -p 27017:27017 -v /Users/fengzhikui/docker/mongo/data/db:/data/db mongo:4.2.8
+db.createUser({ user: 'root', pwd: 'root', roles: [ { role: "userAdminAnyDatabase", db: "admin" } ] });
+db.auth("root","root");
+db.createUser({ user: 'fzk', pwd: 'root', roles: [ { role: "readWrite", db: "fzk" } ] });
+docker exec -it mongo  mongo admin
+
+use fzk
+db.fzk.save({});
+

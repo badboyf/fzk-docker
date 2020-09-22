@@ -1,0 +1,5 @@
+docker run --rm -d --name pg -v /Users/fengzhikui/docker/pg/data:/var/lib/postgresql/data/ -e POSTGRES_PASSWORD=root -p 5432:5432 postgres:9.6
+/usr/pgsql-12/bin/postgresql-setup initdb
+su - postgres
+psql -U postgres -h 127.0.0.1 -p 5432
+CREATE USER kong;CREATE DATABASE kong OWNER kong;ALTER USER kong WITH password 'kong';create user konga with password 'konga';alter role konga login;create database konga owner konga;grant all privileges on database konga to konga

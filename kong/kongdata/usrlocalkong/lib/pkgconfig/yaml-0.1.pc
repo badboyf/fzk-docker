@@ -1,0 +1,10 @@
+prefix=/usr/local
+exec_prefix=${prefix}
+includedir=/tmp/yaml-0.2.3
+libdir=/usr/local/kong/lib
+
+Name: LibYAML
+Description: Library to parse and emit YAML
+Version: 0.2.3
+Cflags: -I${includedir}
+Libs: -L${libdir} -lyaml
